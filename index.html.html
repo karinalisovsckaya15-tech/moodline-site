@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOODLINE VISUALS — Photo • Video • Social</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Премиальная черно-золотая палитра */
+            --bg-main: #050505;
+            --bg-secondary: #0a0a0a;
+            --text-main: #FFFFFF;
+            --text-muted: #999999;
+            --accent-gold: #D4AF37; /* Золотой цвет */
+            --border-subtle: #333333;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Assistant', 'Heebo', sans-serif;
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: var(--transition-smooth);
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            color: var(--accent-gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        .lang-switch {
+            cursor: pointer;
+            border: 1px solid var(--accent-gold);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            background: transparent;
+            color: var(--accent-gold);
+            transition: var(--transition-smooth);
+        }
+
+        .lang-switch:hover {
+            background: var(--accent-gold);
+            color: var(--bg-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 6vw, 6.5rem);
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            color: var(--text-main);
+        }
+
+        .hero p.subtitle {
+            font-size: 1.1rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+        }
+
+        .hero p.hebrew-tag {
+            font-size: 1rem;
+            direction: rtl;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .hero-media-container {
+            margin-top: 3rem;
+            width: 100%;
+            height: 40vh;
+            max-height: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-media-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+        }
+
+        /* Positioning Screen */
+        .positioning {
+            padding: 10rem 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .positioning p {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            line-height: 1.5;
+            font-weight: 300;
+            color: var(--text-main);
+        }
+
+        /* Selected Work */
+        .selected-work {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--accent-gold);
+        }
+
+        .section-header span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2.5rem;
+        }
+
+        .grid-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: grayscale(20%) contrast(1.1);
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.03);
+            filter: grayscale(0%) contrast(1.1);
+        }
+
+        .item-info {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .item-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 400;
+        }
+
+        .item-category {
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .item-1 { grid-column: span 7; height: 650px; }
+        .item-2 { grid-column: span 5; height: 500px; margin-top: 100px; }
+        .item-3 { grid-column: span 6; height: 700px; }
+
+        /* Full Bleed Bridal */
+        .full-bleed-bridal {
+            position: relative;
+            height: 85vh;
+            margin: 8rem 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .full-bleed-bridal img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .bridal-overlay-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #FFFFFF;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 3rem 5rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--accent-gold);
+        }
+
+        .bridal-overlay-content h3 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+        }
+
+        .bridal-overlay-content p {
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 8rem 4rem;
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .card-img-wrap {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .pricing-card:hover .card-img-wrap img {
+            transform: scale(1.04);
+        }
+
+        .service-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            color: var(--accent-gold);
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            direction: rtl;
+        }
+
+        .service-price {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: var(--border-subtle);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            direction: rtl;
+            margin-bottom: 2.5rem;
+        }
+
+        .service-features li {
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+            position: relative;
+            padding-right: 1.2rem;
+        }
+
+        .service-features li::before {
+            content: "—";
+            position: absolute;
+            right: 0;
+            color: var(--accent-gold);
+        }
+
+        .card-cta-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: var(--transition-smooth);
+        }
+
+        .card-cta-btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-main);
+        }
+
+        .pricing-footer-note {
+            text-align: center;
+            max-width: 700px;
+            margin: 4rem auto 0 auto;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            direction: rtl;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 6rem 4rem 4rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-cta-container {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--bg-main);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            border: 1px solid var(--accent-gold);
+            transition: var(--transition-smooth);
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent-gold);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            header { padding: 1.5rem 2rem; }
+            .selected-work { padding: 4rem 2rem; }
+            .item-1, .item-2, .item-3 { grid-column: span 12; height: 450px; margin-top: 0; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 500px; }
+            .pricing-section { padding: 5rem 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero h1 { font-size: 3.2rem; }
+            .full-bleed-bridal { height: 60vh; }
+            .bridal-overlay-content { padding: 2rem; width: 90%; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .footer-cta-container { flex-direction: column; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">MOODLINE VISUALS</a>
+        <nav>
+            <a href="#work" data-translate="nav_work">עבודות</a>
+            <a href="#bridal" data-translate="nav_bridal">כלות</a>
+            <a href="#pricing" data-translate="nav_pricing">מחירים</a>
+            <a href="#contact" data-translate="nav_contact">יצירת קשר</a>
+            <button class="lang-switch" id="langToggle">EN / HE</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-translate="hero_title">MOODLINE VISUALS</h1>
+            <p class="subtitle">PHOTO • VIDEO • SOCIAL</p>
+            <p class="hebrew-tag" data-translate="hero_tag">צילום אופנה, תוכן עסקי וכלות בראייה אסתטית וייחודית</p>
+        </div>
+        <div class="hero-media-container">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80" alt="Moodline Fashion Editorial">
+        </div>
+    </section>
+
+    <section class="positioning">
+        <p data-translate="positioning_text">
+            אנו יוצרים שפה ויזואלית מדויקת המשלבת בין רגעים טבעיים, אסתטיקה עיתונאית (Editorial) וקו נקי ומינימליסטי לנשים, מותגים וכלות שלא מתפשרות על סטייל.
+        </p>
+    </section>
+
+    <section class="selected-work" id="work">
+        <div class="section-header">
+            <h2 data-translate="work_heading">עבודות נבחרות</h2>
+            <span data-translate="work_sub">SELECTED WORK / 01</span>
+        </div>
+
+        <div class="editorial-grid">
+            <div class="grid-item item-1">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85" alt="Fashion Editorial">
+                <div class="item-info">
+                    <span class="item-title" data-translate="item1_title">FASHION & PORTRAIT</span>
+                    <span class="item-category">EDITORIAL</span>
+                </div>
+            </div>
+
+            <div class="grid-item item-2" id="bridal">
+                <img src="https://images.unsplash.com/photo-1594552072238-b8a3478beecd?auto=format&fit=crop&w=1000&q=85" alt="Bridal Editorial">
+                <div class="item-info">
+                    <span class="item-title" data-translate="item2_title">STRONG FEMININE BRIDAL</span>
+                    <span class="item-category">BRIDAL STORY</span>
+                </div>
+            </div>
+
+            <div class="grid-item item-3">
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85" alt="Social & Motion">
+                <div class="item-info">
+                    <span class="item-title" data-translate="item3_title">SOCIAL & BRAND MOTION</span>
+                    <span class="item-category">REELS / CONTENT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="full-bleed-bridal">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1800&q=85" alt="Bridal Architecture Story">
+        <div class="bridal-overlay-content">
+            <h3 data-translate="bridal_banner_title">BRIDAL RE-IMAGINED</h3>
+            <p data-translate="bridal_banner_sub">ללא קלישאות סכריניות • סיפור אופנתי אותנטי</p>
+        </div>
+    </section>
+
+    <section class="pricing-section" id="pricing">
+        <div class="section-header" style="max-width: 1300px; margin: 0 auto 4rem auto;">
+            <h2 data-translate="pricing_heading">חבילות ושירותים</h2>
+            <span data-translate="pricing_sub">INVESTMENT / 02</span>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div>
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="Fashion Service">
+                    </div>
+                    <h3 class="service-title">FASHION / PORTRAIT</h3>
+                    <p class="service-desc" data-translate="desc_fashion">צילומי אופנה, פורטרט ופרויקטים אישיים המבוססים על תאורה מדויקת, עריכה קולנועית ואווירה ייחודית.</p>
+                    <div class="service-price">החל מ־600 ₪</div>
+                    <div class="divider"></div>
+                    <ul class="service-features">
+                        <li data-translate="f_ash_1">פגישת היכרות והגדרת קונספט</li>
+                        <li data-translate="f_ash_2">צילום של 2–3 שעות בלוקיישן לבחירה</li>
+                        <li data-translate="f_ash_3">20 תמונות ערוכות בפורמט עריכה מלא</li>
+                        <li data-translate="f_ash_4">גלריית דיגיטל פרטית להורדה מהירה</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/972500000000" class="card-cta-btn" data-translate="btn_inquire">לתיאום הפקה</a>
+            </div>
+
+            <div class="pricing-card">
+                <div>
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" alt="Bridal Service">
+                    </div>
+                    <h3 class="service-title">BRIDAL CONTENT</h3>
+                    <p class="service-desc" data-translate="desc_bridal">תיעוד יום חתונה או הפקת כלות בסגנון Editorial נקי, המשלב אסתטיקה גבוהה ותשומת לב לכל פרט ופרט.</p>
+                    <div class="service-price">החל מ־1,200 ₪</div>
+                    <div class="divider"></div>
+                    <ul class="service-features">
+                        <li data-translate="f_bri_1">תכנון מדויק של לוח הזמנים ליום האירוע</li>
+                        <li data-translate="f_bri_2">צילום סטילס ווידאו אנכי ייעודי לרשתות</li>
+                        <li data-translate="f_bri_3">עריכה מהירה לשימוש מיידי ברשתות החברתיות</li>
+                        <li data-translate="f_bri_4">חבילת חומרי גלם מלאה</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/972500000000" class="card-cta-btn" data-translate="btn_inquire">לתיאום הפקה</a>
+            </div>
+
+            <div class="pricing-card">
+                <div>
+                    <div class="card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1534126511673-b6899657816a?auto=format&fit=crop&w=800&q=80" alt="Social Service">
+                    </div>
+                    <h3 class="service-title">SOCIAL / BUSINESS</h3>
+                    <p class="service-desc" data-translate="desc_social">תוכן ויזואלי מותאם למותגים, יוצרים ועסקים שרוצים לבלוט בפיד עם נוכחות חזקה, נקייה ומקצועית.</p>
+                    <div class="service-price">החל מ־1,000 ₪</div>
+                    <div class="divider"></div>
+                    <ul class="service-features">
+                        <li data-translate="f_soc_1">צילום של 2–3 שעות ממוקד מותג</li>
+                        <li data-translate="f_soc_2">25 תמונות ערוכות לבחירה מדויקת</li>
+                        <li data-translate="f_soc_3">תוכן וידאו מותאם לרשתות (Reels / TikTok)</li>
+                        <li data-translate="f_soc_4">2–3 סרטונים ערוכים ומוכנים לפרסום</li>
+                    </ul>
+                </div>
+                <a href="https://wa.me/972500000000" class="card-cta-btn" data-translate="btn_inquire">לתיאום הפקה</a>
+            </div>
+        </div>
+
+        <div class="pricing-footer-note" data-translate="pricing_footer_note">
+            המחיר הסופי נקבע בהתאם לקונספט, היקף הצילום והצרכים המדויקים של ההפקה.
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-cta-container">
+            <a href="https://wa.me/972500000000" class="btn-primary" data-translate="footer_whatsapp">שוחחי איתי בוואטסאפ</a>
+            <!-- ВНИМАНИЕ: Здесь встроена ваша ссылка на галереи Vigbo -->
+            <a href="https://6a95d909e5d292-43524649.gallery.photo" class="btn-secondary" data-translate="footer_galleries">גלריות ללקוחות (Vigbo)</a>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 MOODLINE VISUALS. All Rights Reserved.</p>
+            <p>PHOTO • VIDEO • SOCIAL</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            he: {
+                dir: 'rtl',
+                nav_work: 'עבודות',
+                nav_bridal: 'כלות',
+                nav_pricing: 'מחירים',
+                nav_contact: 'יצירת קשר',
+                hero_title: 'MOODLINE VISUALS',
+                hero_tag: 'צילום אופנה, תוכן עסקי וכלות בראייה אסתטית וייחודית',
+                positioning_text: 'אנו יוצרים שפה ויזואלית מדויקת המשלבת בין רגעים טבעיים, אסתטיקה עיתונאית (Editorial) וקו נקי ומינימליסטי לנשים, מותגים וכלות שלא מתפשרות על סטייל.',
+                work_heading: 'עבודות נבחרות',
+                work_sub: 'SELECTED WORK / 01',
+                item1_title: 'FASHION & PORTRAIT',
+                item2_title: 'STRONG FEMININE BRIDAL',
+                item3_title: 'SOCIAL & BRAND MOTION',
+                bridal_banner_title: 'BRIDAL RE-IMAGINED',
+                bridal_banner_sub: 'ללא קלישאות סכריניות • סיפור אופנתי אותנטי',
+                pricing_heading: 'חבילות ושירותים',
+                pricing_sub: 'INVESTMENT / 02',
+                desc_fashion: 'צילומי אופנה, פורטרט ופרויקטים אישיים המבוססים על תאורה מדויקת, עריכה קולנועית ואווירה ייחודית.',
+                f_ash_1: 'פגישת היכרות והגדרת קונספט',
+                f_ash_2: 'צילום של 2–3 שעות בלוקיישן לבחירה',
+                f_ash_3: '20 תמונות ערוכות בפורמט עריכה מלא',
+                f_ash_4: 'גלריית דיגיטל פרטית להורדה מהירה',
+                desc_bridal: 'תיעוד יום חתונה או הפקת כלות בסגנון Editorial נקי, המשלב אסתטיקה גבוהה ותשומת לב לכל פרט ופרט.',
+                f_bri_1: 'תכנון מדויק של לוח הזמנים ליום האירוע',
+                f_bri_2: 'צילום סטילס ווידאו אנכי ייעודי לרשתות',
+                f_bri_3: 'עריכה מהירה לשימוש מיידי ברשתות החברתיות',
+                f_bri_4: 'חבילת חומרי גלם מלאה',
+                desc_social: 'תוכן ויזואלי מותאם למותגים, יוצרים ועסקים שרוצים לבלוט בפיד עם נוכחות חזקה, נקייה ומקצועית.',
+                f_soc_1: 'צילום של 2–3 שעות ממוקד מותג',
+                f_soc_2: '25 תמונות ערוכות לבחירה מדויקת',
+                f_soc_3: 'תוכן וידאו מותאם לרשתות (Reels / TikTok)',
+                f_soc_4: '2–3 סרטונים ערוכים ומוכנים לפרסום',
+                btn_inquire: 'לתיאום הפקה',
+                pricing_footer_note: 'המחיר הסופי נקבע בהתאם לקונספט, היקף הצילום והצרכים המדויקים של ההפקה.',
+                footer_whatsapp: 'שוחחי איתי בוואטסאפ',
+                footer_galleries: 'גלריות ללקוחות (Vigbo)'
+            },
+            en: {
+                dir: 'ltr',
+                nav_work: 'Work',
+                nav_bridal: 'Bridal',
+                nav_pricing: 'Pricing',
+                nav_contact: 'Contact',
+                hero_title: 'MOODLINE VISUALS',
+                hero_tag: 'Fashion photography, brand content & bridal with an editorial aesthetic',
+                positioning_text: 'We create a precise visual language combining natural moments, editorial aesthetics, and a clean minimalist line for women, brands, and brides who refuse to compromise on style.',
+                work_heading: 'Selected Work',
+                work_sub: 'SELECTED WORK / 01',
+                item1_title: 'FASHION & PORTRAIT',
+                item2_title: 'STRONG FEMININE BRIDAL',
+                item3_title: 'SOCIAL & BRAND MOTION',
+                bridal_banner_title: 'BRIDAL RE-IMAGINED',
+                bridal_banner_sub: 'No sugary clichés • Authentic fashion storytelling',
+                pricing_heading: 'Packages & Services',
+                pricing_sub: 'INVESTMENT / 02',
+                desc_fashion: 'Fashion, portrait and personal projects built on precise lighting, cinematic grading, and unique atmosphere.',
+                f_ash_1: 'Concept session and creative direction',
+                f_ash_2: '2–3 hour session at chosen location',
+                f_ash_3: '20 fully edited high-res images',
+                f_ash_4: 'Private digital gallery for fast download',
+                desc_bridal: 'Wedding day documentation or bridal editorial shoots with clean styling and high aesthetic attention.',
+                f_bri_1: 'Precise timeline planning for wedding day',
+                f_bri_2: 'Dedicated vertical video and stills coverage',
+                f_bri_3: 'Fast turn-around highlights for social media',
+                f_bri_4: 'Full raw media package',
+                desc_social: 'Visual content tailored for brands, creators, and businesses seeking a strong, clean digital presence.',
+                f_soc_1: '2–3 hour brand-focused session',
+                f_soc_2: '25 carefully selected edited photos',
+                f_soc_3: 'Social-tailored vertical video (Reels/TikTok)',
+                f_soc_4: '2–3 fully edited ready-to-post videos',
+                btn_inquire: 'Inquire Now',
+                pricing_footer_note: 'Final pricing is determined by concept, scale of production, and exact project requirements.',
+                footer_whatsapp: 'Chat on WhatsApp',
+                footer_galleries: 'Client Galleries'
+            }
+        };
+
+        let currentLang = 'he';
+        const langToggleBtn = document.getElementById('langToggle');
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            document.documentElement.setAttribute('dir', translations[currentLang].dir);
+            
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+        });
+    </script>
+</body>
+</html>
