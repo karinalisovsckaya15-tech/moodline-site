@@ -111,7 +111,27 @@ img,video{max-width:100%;display:block}
   .hero{height:66svh;min-height:440px}
   .nav{display:none}
   .hero-mark{right:auto;left:var(--pad);text-align:right;max-width:280px}
-  .cubes{grid-template-columns:1fr;gap:12px}
+
+  /* Mobile only: 3 category cubes become a light swipe slider */
+  .cubes{
+    display:flex;
+    grid-template-columns:none;
+    gap:10px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding:18px 11vw 20px;
+    scrollbar-width:none;
+  }
+  .cubes::-webkit-scrollbar{display:none}
+  .cube{
+    flex:0 0 78vw;
+    max-width:78vw;
+    scroll-snap-align:center;
+    aspect-ratio:4/5;
+  }
+  .cube:hover{transform:none}
+
   .story{display:block;height:auto}
   .story figure{width:100%!important;height:auto;aspect-ratio:4/5;margin-bottom:14px}
   .story-copy{display:block}
@@ -147,6 +167,31 @@ img,video{max-width:100%;display:block}
 .contact p{color:#c9c0b3;font-size:13.5px;line-height:1.75;margin:0;max-width:340px}
 .cta{display:inline-flex;align-items:center;gap:10px;border:0;border-bottom:1px solid #c9a24a;background:none;color:#f6f2ea;padding:0 0 6px;text-decoration:none;font:400 18px var(--he-display)}
 .cta span:last-child{font-family:var(--display);color:#c9a24a}
+
+/* ---------- MOBILE TALK CTA ---------- */
+.mobile-talk{
+  display:none;
+}
+@media(max-width:700px){
+  .mobile-talk{
+    position:fixed;
+    right:14px;
+    bottom:14px;
+    z-index:25;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:10px 13px;
+    border-radius:999px;
+    background:rgba(20,17,14,.92);
+    color:#fff8ef;
+    text-decoration:none;
+    font:600 12px/1.1 var(--body);
+    box-shadow:0 8px 24px rgba(0,0,0,.18);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+  }
+}
 
 /* ---------- FOOTER — узкая, самостоятельная плашка по центру ---------- */
 .footer-wrap{padding:34px var(--pad) 50px;display:flex;justify-content:center;background:var(--sand)}
@@ -312,6 +357,10 @@ img,video{max-width:100%;display:block}
   </div>
 </section>
 
+<a class="mobile-talk" href="https://wa.me/972535232361" target="_blank" rel="noopener" aria-label="Talk to me">
+  <span data-he="דברי איתי 💌" data-ru="Поговори со мной 💌"></span>
+</a>
+
 <div class="footer-wrap">
   <div class="footer">
     <span>MOODLION © 2026</span><span class="dot">·</span><span>ISRAEL</span>
@@ -386,5 +435,73 @@ if (choiceRow && dots.length) {
 }
 apply();
 </script>
+
+<script>
+(function(){
+  const mq = window.matchMedia('(max-width: 900px)');
+  const slider = document.querySelector('.cubes');
+  if (!slider) return;
+
+  let timer = null;
+  let index = 0;
+  let userInteracting = false;
+
+  function cards(){ return Array.from(slider.querySelectorAll('.cube')); }
+
+  function goTo(i){
+    const items = cards();
+    if (!items.length) return;
+    index = (i + items.length) % items.length;
+    items[index].scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center',
+      block: 'nearest'
+    });
+  }
+
+  function start(){
+    stop();
+    if (!mq.matches) return;
+    timer = setInterval(() => {
+      if (!userInteracting) goTo(index + 1);
+    }, 2500);
+  }
+
+  function stop(){
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  slider.addEventListener('touchstart', () => { userInteracting = true; }, {passive:true});
+  slider.addEventListener('touchend', () => {
+    userInteracting = false;
+    setTimeout(start, 1200);
+  }, {passive:true});
+
+  slider.addEventListener('pointerdown', () => { userInteracting = true; });
+  slider.addEventListener('pointerup', () => {
+    userInteracting = false;
+    setTimeout(start, 1200);
+  });
+
+  slider.addEventListener('scroll', () => {
+    if (!mq.matches) return;
+    const items = cards();
+    if (!items.length) return;
+    const center = slider.scrollLeft + slider.clientWidth / 2;
+    let best = 0, bestDist = Infinity;
+    items.forEach((el, i) => {
+      const elCenter = el.offsetLeft + el.offsetWidth / 2;
+      const d = Math.abs(elCenter - center);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    index = best;
+  }, {passive:true});
+
+  mq.addEventListener?.('change', start);
+  start();
+})();
+</script>
+
 </body>
 </html>
