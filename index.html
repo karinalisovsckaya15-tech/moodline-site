@@ -452,10 +452,13 @@ apply();
     const items = cards();
     if (!items.length) return;
     index = (i + items.length) % items.length;
-    items[index].scrollIntoView({
-      behavior: 'smooth',
-      inline: 'center',
-      block: 'nearest'
+
+    const target = items[index];
+    const left = target.offsetLeft - (slider.clientWidth - target.clientWidth) / 2;
+
+    slider.scrollTo({
+      left: Math.max(0, left),
+      behavior: 'smooth'
     });
   }
 
@@ -464,7 +467,7 @@ apply();
     if (!mq.matches) return;
     timer = setInterval(() => {
       if (!userInteracting) goTo(index + 1);
-    }, 3500);
+    }, 2500);
   }
 
   function stop(){
